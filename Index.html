@@ -1,0 +1,2566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MIND STORIES</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#090909;
+color:#fff;
+min-height:100vh
+}
+
+header{
+background:linear-gradient(135deg,#180000,#430000,#100000);
+padding:20px 15px;
+text-align:center;
+border-bottom:1px solid #5a1111;
+position:sticky;
+top:0;
+z-index:100
+}
+
+.logo{
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-size:30px;
+font-weight:900;
+color:#ff3333;
+letter-spacing:2px;
+text-shadow:
+0 0 5px rgba(255,40,40,.7),
+0 0 12px rgba(255,20,20,.5)
+}
+
+.tagline{
+font-family:"Trebuchet MS",Arial,sans-serif;
+color:#aaa;
+font-size:13px;
+margin-top:5px
+}
+
+.coins{
+margin-top:10px;
+display:inline-block;
+background:#171717;
+border:1px solid #8b1a1a;
+padding:7px 14px;
+border-radius:20px;
+color:#ffd700;
+font-weight:900
+}
+
+nav{
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding:10px;
+background:#0d0d0d;
+border-bottom:1px solid #222
+}
+
+nav button{
+flex-shrink:0;
+background:#181818;
+color:#ddd;
+border:1px solid #333;
+padding:9px 13px;
+border-radius:8px;
+cursor:pointer;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900
+}
+
+nav button:hover{
+background:#3b0909;
+border-color:#8b1a1a
+}
+
+.page{
+display:none;
+padding:18px;
+max-width:900px;
+margin:auto
+}
+
+.page.active{
+display:block
+}
+
+.section-title{
+color:#ff3333;
+margin-bottom:18px;
+text-align:center;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900;
+letter-spacing:.5px;
+text-shadow:
+0 0 6px rgba(255,40,40,.5),
+0 0 14px rgba(255,20,20,.25)
+}
+
+.card{
+background:linear-gradient(145deg,#151515,#0d0d0d);
+border:1px solid #3b1515;
+border-radius:14px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.4)
+}
+
+.story-title{
+color:#ff4444;
+font-size:21px;
+margin-bottom:8px;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900;
+letter-spacing:.3px
+}
+
+.story-description{
+font-family:Arial,sans-serif;
+color:#aaa;
+line-height:1.6;
+margin-bottom:14px
+}
+
+/* LUXURY BUTTON GLOW */
+
+button{
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900;
+cursor:pointer;
+transition:
+box-shadow .2s ease,
+transform .15s ease,
+background .2s ease,
+border-color .2s ease;
+box-shadow:
+0 2px 8px rgba(255,45,45,.25),
+0 0 5px rgba(255,45,45,.25)
+}
+
+button:hover{
+box-shadow:
+0 4px 16px rgba(255,45,45,.45),
+0 0 14px rgba(255,45,45,.55),
+0 0 28px rgba(255,45,45,.25);
+transform:translateY(-1px)
+}
+
+button:active,
+button:focus{
+outline:none;
+transform:scale(.97);
+box-shadow:
+0 0 8px rgba(255,40,40,.95),
+0 0 18px rgba(255,40,40,.9),
+0 0 32px rgba(255,30,30,.75),
+0 0 55px rgba(255,20,20,.45);
+border-color:#ff4444;
+}
+
+.red-btn{
+background:linear-gradient(145deg,#a91515,#710909);
+color:#fff;
+border:1px solid #d52b2b;
+padding:11px 16px;
+border-radius:8px;
+cursor:pointer;
+font-weight:900;
+font-family:"Trebuchet MS",Arial,sans-serif
+}
+
+.red-btn:hover{
+background:linear-gradient(145deg,#c51d1d,#8d0b0b);
+box-shadow:
+0 4px 18px rgba(255,30,30,.55),
+0 0 18px rgba(255,30,30,.6),
+0 0 35px rgba(255,30,30,.3)
+}
+
+.red-btn:active,
+.red-btn:focus{
+background:linear-gradient(145deg,#d92828,#8f0909);
+box-shadow:
+0 0 10px rgba(255,50,50,1),
+0 0 22px rgba(255,40,40,.95),
+0 0 40px rgba(255,20,20,.8),
+0 0 65px rgba(255,10,10,.5);
+}
+
+.delete-btn{
+background:#3a1010;
+color:#ff6666;
+border:1px solid #641818;
+padding:11px 16px;
+border-radius:8px;
+cursor:pointer;
+font-weight:900;
+font-family:"Trebuchet MS",Arial,sans-serif;
+margin-left:6px
+}
+
+.delete-btn:active,
+.delete-btn:focus{
+box-shadow:
+0 0 10px rgba(255,40,40,1),
+0 0 22px rgba(255,40,40,.9),
+0 0 40px rgba(255,20,20,.7)
+}
+
+input,textarea,select{
+width:100%;
+background:#111;
+color:#fff;
+border:1px solid #3b3b3b;
+border-radius:8px;
+padding:12px;
+margin-top:7px;
+margin-bottom:15px;
+outline:none;
+font-family:Arial,sans-serif
+}
+
+input:focus,textarea:focus,select:focus{
+border-color:#a71919
+}
+
+textarea{
+min-height:220px;
+resize:vertical
+}
+
+label{
+color:#ccc;
+font-size:14px;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900
+}
+
+.reader{
+background:#111;
+border:1px solid #321010;
+border-radius:12px;
+padding:20px;
+line-height:1.9;
+white-space:pre-wrap;
+font-family:Georgia,"Times New Roman",serif
+}
+
+.creator-box{
+text-align:center
+}
+
+.creator-name{
+font-size:28px;
+color:#fff;
+margin-bottom:10px;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900;
+text-shadow:
+0 0 5px rgba(255,255,255,.3),
+0 0 12px rgba(255,40,40,.25)
+}
+
+.phone{
+color:#aaa;
+margin-bottom:18px;
+font-family:Arial,sans-serif
+}
+
+.game-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:10px
+}
+
+.game-card{
+background:#151515;
+border:1px solid #351111;
+padding:15px;
+border-radius:12px;
+cursor:pointer;
+text-align:center;
+transition:
+box-shadow .2s ease,
+transform .15s ease,
+background .2s ease
+}
+
+.game-card:hover{
+background:#300909;
+box-shadow:
+0 0 14px rgba(255,40,40,.5),
+0 0 28px rgba(255,20,20,.25)
+}
+
+.game-card:active{
+transform:scale(.97);
+box-shadow:
+0 0 10px rgba(255,50,50,1),
+0 0 22px rgba(255,40,40,.9),
+0 0 40px rgba(255,20,20,.7)
+}
+
+.game-title{
+color:#ff4444;
+font-weight:900;
+font-family:"Trebuchet MS",Arial,sans-serif;
+margin-bottom:7px
+}
+
+.game-area{
+text-align:center
+}
+
+.game-question{
+font-size:25px;
+color:#fff;
+margin:25px 0;
+line-height:1.5;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900
+}
+
+.game-info{
+color:#aaa;
+margin-bottom:15px;
+font-family:Arial,sans-serif
+}
+
+.game-options{
+display:grid;
+gap:10px;
+max-width:500px;
+margin:auto
+}
+
+.game-option{
+background:#191919;
+color:#fff;
+border:1px solid #451313;
+padding:13px;
+border-radius:8px;
+cursor:pointer;
+font-family:"Trebuchet MS",Arial,sans-serif;
+font-weight:900
+}
+
+.game-option:hover{
+background:#4b1010
+}
+
+.game-option:active,
+.game-option:focus{
+background:#671111;
+box-shadow:
+0 0 10px rgba(255,40,40,1),
+0 0 22px rgba(255,40,40,.9),
+0 0 40px rgba(255,20,20,.7)
+}
+
+.empty{
+text-align:center;
+color:#777;
+padding:30px 10px;
+font-family:Arial,sans-serif
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:#666;
+font-size:13px;
+border-top:1px solid #1e1e1e;
+margin-top:30px;
+font-family:"Trebuchet MS",Arial,sans-serif
+}
+
+.ban-icon{
+width:90px;
+height:90px;
+margin:0 auto 25px;
+border:5px solid #8b1a1a;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:45px;
+color:#ff3333
+}
+
+button.luxury-tap{
+box-shadow:
+0 0 10px rgba(255,50,50,1),
+0 0 22px rgba(255,40,40,.95),
+0 0 40px rgba(255,20,20,.8),
+0 0 65px rgba(255,10,10,.5)!important;
+transform:scale(.97);
+border-color:#ff5555!important
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">MIND STORIES</div>
+<div class="tagline">Every mind has a story.</div>
+<div class="coins">🪙 <span id="coinDisplay">0</span> Coins</div>
+</header>
+
+<nav>
+<button onclick="showPage('stories')">📖 Stories</button>
+<button onclick="showPage('create')">✍️ Create</button>
+<button onclick="showPage('game')">🎮 Game</button>
+<button onclick="showPage('myStories')">📚 My Stories</button>
+<button onclick="showPage('creator')">👤 Creator</button>
+<button onclick="showPage('description')">ℹ️ Discreption</button>
+</nav>
+
+<section id="stories" class="page active">
+<h2 class="section-title">The Endless Journey</h2>
+
+<div class="card">
+<div class="story-title">The Endless Journey 1</div>
+<p class="story-description">
+A heartbreaking journey through darkness, pain, survival and hope.
+</p>
+<button class="red-btn" onclick="openBuiltInStory(1)">Read Now</button>
+</div>
+
+<div class="card">
+<div class="story-title">The Endless Journey 2</div>
+<p class="story-description">
+The forest had become quieter. The journey continues through darkness, pain, survival and hope.
+</p>
+<button class="red-btn" onclick="openBuiltInStory(2)">Read Now</button>
+</div>
+
+<div class="card">
+<div class="story-title">The Endless Journey 3</div>
+<p class="story-description">
+David's journey through grief, loss, kindness, healing and hope.
+</p>
+<button class="red-btn" onclick="openBuiltInStory(3)">Read Now</button>
+</div>
+</section>
+
+<section id="create" class="page">
+<h2 class="section-title">Create Your Story</h2>
+
+<div class="card">
+<p style="color:#aaa;margin-bottom:15px;text-align:center">
+Creating and publishing a story costs
+<b style="color:#ffd700">100 Coins</b>.
+</p>
+
+<label>Story Title</label>
+<input id="storyTitle" type="text" placeholder="Enter your story title">
+
+<label>Story</label>
+<textarea id="storyText" placeholder="Write your story here..."></textarea>
+
+<label>Font Text</label>
+<select id="storyFont">
+<option>Arial</option>
+<option>Georgia</option>
+<option>Times New Roman</option>
+<option>Courier New</option>
+<option>Verdana</option>
+<option>Trebuchet MS</option>
+<option>Impact</option>
+</select>
+
+<label>Font Color</label>
+<input id="storyColor" type="color" value="#ffffff">
+
+<button class="red-btn" onclick="saveStory()">
+✍️ Publish Story - 100 Coins
+</button>
+</div>
+</section>
+
+<section id="reader" class="page">
+<h2 id="readerTitle" class="section-title"></h2>
+
+<div id="readerContent" class="reader"></div>
+
+<br>
+
+<button class="red-btn" onclick="showPage('stories')">
+← Back to Stories
+</button>
+</section>
+
+<section id="game" class="page">
+
+<h2 class="section-title">🎮 MIND STORIES GAMES</h2>
+
+<div id="gameSelection">
+
+<div class="card">
+
+<p style="text-align:center;color:#aaa;line-height:1.7">
+Choose a game. Every game has 100 levels.<br>
+
+Win = <b style="color:#ffd700">+10 Coins</b>.<br>
+
+Fail = <b style="color:#ff3333">-10 Coins</b>.<br>
+
+If you have 0 Coins, 2 failures will result in a 10-minute game ban.<br>
+
+The games become extremely difficult as your level increases.
+</p>
+
+</div>
+
+<div id="gameGrid" class="game-grid"></div>
+
+</div>
+
+<div id="gamePlay" class="game-area" style="display:none">
+
+<div class="card">
+
+<h3 id="currentGameName" class="story-title"></h3>
+
+<div id="gameLevel" class="game-info"></div>
+
+<div class="game-info">
+Win = +10 Coins • Fail = -10 Coins
+</div>
+
+<div id="gameQuestion" class="game-question"></div>
+
+<div id="gameOptions" class="game-options"></div>
+
+</div>
+
+<button class="red-btn" onclick="backToGames()">
+← Back to Games
+</button>
+
+</div>
+</section>
+
+<section id="gameBan" class="page">
+
+<div style="
+min-height:65vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center
+">
+
+<div class="card" style="
+width:100%;
+max-width:430px;
+padding:35px 20px
+">
+
+<div class="ban-icon">🚫</div>
+
+<h2 style="
+color:#ff3333;
+margin-bottom:30px;
+font-family:'Trebuchet MS',Arial,sans-serif;
+font-weight:900
+">
+You can't play games due to failure
+</h2>
+
+<div id="banCountdown" style="
+font-size:28px;
+font-weight:bold;
+color:#ffd700;
+font-family:'Trebuchet MS',Arial,sans-serif
+">
+10:00
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="myStories" class="page">
+<h2 class="section-title">My Stories</h2>
+<div id="myStoriesList"></div>
+</section>
+
+<section id="creator" class="page">
+<h2 class="section-title">Creator</h2>
+
+<div class="card creator-box">
+
+<div class="creator-name">JAY JAY²⁴⁷</div>
+
+<div class="phone">2348112737174</div>
+
+<button class="red-btn"
+onclick="window.location.href='tel:2348112737174'">
+📞 Call Creator
+</button>
+
+<button class="red-btn"
+onclick="window.open('https://wa.me/2348112737174','_blank')">
+💬 WhatsApp
+</button>
+
+</div>
+</section>
+
+<section id="description" class="page">
+
+<h2 class="section-title">Discreption</h2>
+
+<div class="card">
+
+<p style="
+color:#bbb;
+line-height:1.8;
+text-align:center
+">
+this app can be updated at anytime , when they are new features you we know, thanks for your understanding.
+</p>
+
+</div>
+</section>
+
+<footer>MIND STORIES © 2026</footer>
+
+<script>
+
+/* LUXURY TAP EFFECT */
+
+document.addEventListener("click",function(e){
+
+let button=e.target.closest("button");
+
+if(!button)return;
+
+button.classList.remove("luxury-tap");
+
+void button.offsetWidth;
+
+button.classList.add("luxury-tap");
+
+setTimeout(()=>{
+button.classList.remove("luxury-tap");
+},500);
+
+});
+
+
+let coins=parseInt(localStorage.getItem("mindCoins"))||0;
+
+let stories=
+JSON.parse(localStorage.getItem("mindStories"))||[];
+
+let zeroCoinFailures=
+parseInt(localStorage.getItem("mindZeroCoinFailures"))||0;
+
+let gameBanUntil=
+parseInt(localStorage.getItem("mindGameBanUntil"))||0;
+
+let banTimer=null;
+
+
+const creatorStory=`The Endless Journey
+
+The night was cold.
+
+The road ahead looked endless, and every step felt heavier than the last.
+
+Sometimes life takes us through places we never wanted to visit. Sometimes the people we love are forced to walk beside us through darkness.
+
+But even in the darkest forest, there can still be a small light.
+
+A reason to keep walking.
+
+A reason to keep surviving.
+
+And sometimes...
+
+the people beside you become the reason you continue.`;
+
+
+const endlessJourney2Story=`THE ENDLESS JOURNEY 2
+
+The forest had become quieter.
+
+The trees stood like shadows against the dark sky, their branches moving slowly whenever the cold wind passed through them.
+
+The family continued walking.
+
+Their feet were tired.
+
+Their clothes were wet.
+
+Their hearts were heavy.
+
+But they could not stop.
+
+Behind them was everything they had lost.
+
+In front of them was a road they could not see.
+
+The father looked at his family and tried to hide his fear.
+
+He wanted to tell them everything would be fine.
+
+But deep inside, he wasn't sure.
+
+The mother held her child close.
+
+The child was too young to understand why they were running.
+
+He only knew that his parents were afraid.
+
+Hours passed.
+
+The darkness became deeper.
+
+Then they heard something.
+
+A sound from far inside the forest.
+
+They stopped.
+
+Nobody spoke.
+
+The father slowly turned around.
+
+Nothing.
+
+Only trees.
+
+Only darkness.
+
+Only the sound of their breathing.
+
+They continued.
+
+Every step became a memory.
+
+Every shadow looked like danger.
+
+Every sound felt like the end.
+
+But they kept moving.
+
+Because sometimes survival does not mean being fearless.
+
+Sometimes survival means being afraid and walking anyway.
+
+The father held his family's hands.
+
+The mother looked at him.
+
+Neither of them said anything.
+
+They didn't need to.
+
+They both understood.
+
+They had already lost too much.
+
+They could not lose each other.
+
+The journey continued.
+
+The forest seemed endless.
+
+But somewhere beyond the darkness, there had to be something.
+
+A place to rest.
+
+A place to breathe.
+
+A place to begin again.
+
+And so they walked.
+
+Together.
+
+Through the cold.
+
+Through the fear.
+
+Through the pain.
+
+Through the endless journey.
+
+Sometimes...
+
+they become the reason you continue.`;
+
+
+const endlessJourney3Story=`# THE ENDLESS JOURNEY 3
+ 
+The road was finally beneath David's feet.
+ 
+But it didn't feel like freedom.
+ 
+He had imagined this moment for so long.
+ 
+He had imagined running toward people.
+ 
+He had imagined someone asking if he was okay.
+ 
+He had imagined hearing a familiar voice telling him that everything was going to be alright.
+ 
+Instead, there was nothing.
+ 
+Just an empty road stretching toward a distant town.
+ 
+David stood there alone.
+ 
+His clothes were covered in dirt. His lips were dry. His eyes were swollen from crying.
+ 
+He looked back at the forest.
+ 
+It was silent.
+ 
+Somewhere behind those trees were the only two people he had ever called home.
+ 
+His father.
+ 
+His mother.
+ 
+David wanted to go back.
+ 
+But he knew there was nothing waiting for him there except memories.
+ 
+So he turned around.
+ 
+And continued walking.
+  
+Hours later, David reached the town.
+ 
+People passed him without stopping.
+ 
+Cars moved along the road.
+ 
+Children laughed outside small houses.
+ 
+Someone was selling food beside a busy street.
+ 
+Life was continuing.
+ 
+That was what hurt the most.
+ 
+The world hadn't stopped because his parents were gone.
+ 
+Nobody knew.
+ 
+Nobody cared.
+ 
+David sat beneath a tree and watched strangers live the life he had lost.
+ 
+An old man eventually noticed him.
+ 
+“Boy,” he called.
+ 
+David looked up.
+ 
+“Where are your parents?”
+ 
+David opened his mouth.
+ 
+Nothing came out.
+ 
+The old man sat beside him.
+ 
+“Are you alone?”
+ 
+David nodded.
+ 
+The old man looked into his eyes and understood.
+ 
+“You don't have to explain.”
+ 
+He gave David a bottle of water.
+ 
+David held it with trembling hands.
+ 
+“Thank you.”
+ 
+It was the first kind word someone had given him since leaving the forest.
+ 
+And somehow, that small kindness broke him.
+ 
+David began crying.
+ 
+Not the quiet tears he had cried in the forest.
+ 
+He cried like a child who had finally found permission to stop pretending he was strong.
+ 
+The old man stayed beside him.
+ 
+He didn't ask questions.
+ 
+He simply stayed.
+  
+That night, David slept in a small room behind the old man's house.
+ 
+For the first time in weeks, he slept on a real bed.
+ 
+But peace didn't come.
+ 
+He dreamed about the forest.
+ 
+He saw his father sitting beside the fire.
+ 
+He saw his mother smiling.
+ 
+He heard their voices.
+ 
+“Keep walking.”
+ 
+David reached for them.
+ 
+“Wait!”
+ 
+But they disappeared.
+ 
+He woke up screaming.
+ 
+The room was dark.
+ 
+His chest was pounding.
+ 
+For a moment, he forgot they were gone.
+ 
+Then reality returned.
+ 
+His eyes filled with tears.
+ 
+He whispered into the darkness,
+ 
+“I made it…”
+ 
+He waited.
+ 
+There was no answer.
+ 
+“I made it out.”
+ 
+Still nothing.
+ 
+David covered his face.
+ 
+“I wish you were here.”
+  
+The following morning, the old man gave him breakfast.
+ 
+“You can stay here,” he said.
+ 
+David looked at him.
+ 
+“For how long?”
+ 
+“As long as you need.”
+ 
+David lowered his eyes.
+ 
+“I don't want to be a burden.”
+ 
+“You're not.”
+ 
+David remained silent.
+ 
+Then he asked,
+ 
+“Why are you helping me?”
+ 
+The old man looked toward the window.
+ 
+“Because many years ago, someone helped me when I had nobody.”
+ 
+He smiled sadly.
+ 
+“I never forgot.”
+ 
+David finally understood.
+ 
+Sometimes kindness wasn't about fixing someone's pain.
+ 
+Sometimes it was simply refusing to let them face it alone.
+  
+Months passed.
+ 
+David slowly began rebuilding his life.
+ 
+He worked.
+ 
+He learned.
+ 
+He helped the old man around the house.
+ 
+But he never forgot the forest.
+ 
+Every night, he looked at the stars.
+ 
+And every night, he wondered whether his parents could somehow see him.
+ 
+One evening, he found the old coat that had belonged to his father.
+ 
+The same coat they had used to cover him before leaving the forest.
+ 
+David held it against his chest.
+ 
+Inside the pocket, he found something.
+ 
+A small photograph.
+ 
+It was old and damaged.
+ 
+His family stood together outside their old home.
+ 
+His father was smiling.
+ 
+His mother was holding David's hand.
+ 
+David stared at the picture for a long time.
+ 
+Then he smiled through his tears.
+ 
+“I remember.”
+ 
+He placed the photograph beside his bed.
+ 
+From that day forward, he carried it everywhere.
+  
+Years later, David returned to the forest.
+ 
+He was no longer the frightened boy who had entered it.
+ 
+He was a grown man.
+ 
+He stood beneath the same trees.
+ 
+The same silence surrounded him.
+ 
+He walked to the place where his father had died.
+ 
+Then to the hill where his mother had said goodbye.
+ 
+He placed two flowers on the ground.
+ 
+One for his father.
+ 
+One for his mother.
+ 
+“I kept walking,” he whispered.
+ 
+The wind moved gently through the trees.
+ 
+For the first time, David didn't feel afraid.
+ 
+He closed his eyes.
+ 
+And somehow, in the sound of the leaves, he imagined hearing their voices.
+ 
+His father's voice.
+ 
+His mother's voice.
+ 
+Not telling him to keep walking anymore.
+ 
+But telling him:
+ 
+**“You can rest now.”**
+ 
+David smiled.
+ 
+Tears rolled down his face.
+ 
+He finally understood.
+ 
+The journey had never truly been endless.
+ 
+It only felt endless because grief makes every road seem longer.
+ 
+And although he had lost the people who began the journey with him…
+ 
+their love had remained inside him.
+ 
+David turned away from the forest.
+ 
+He took one final look back.
+ 
+Then he walked toward home.
+ 
+Not the home he had lost.
+ 
+But the home he had built inside himself.
+ 
+And for the first time in many years…
+ 
+he wasn't walking because he was trying to escape something.
+ 
+He was walking because he had finally found something worth living for.
+ 
+**Hope.**`;
+
+
+function updateCoins(){
+
+document.getElementById("coinDisplay").textContent=coins;
+
+localStorage.setItem(
+"mindCoins",
+coins
+)
+
+}
+
+
+function showPage(page){
+
+if(page==="game"&&checkGameBan())return;
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById(page)
+.classList.add("active");
+
+if(page==="myStories")
+loadMyStories();
+
+}
+
+
+function openReader(
+title,
+text,
+font="Arial",
+color="#fff"
+){
+
+document.getElementById("readerTitle")
+.textContent=title;
+
+let c=
+document.getElementById("readerContent");
+
+c.textContent=text;
+
+c.style.fontFamily=font;
+
+c.style.color=color;
+
+showPage("reader")
+
+}
+
+
+function openBuiltInStory(n){
+
+if(n===1)
+openReader(
+"The Endless Journey 1",
+creatorStory
+);
+
+if(n===2)
+openReader(
+"The Endless Journey 2",
+endlessJourney2Story
+);
+
+if(n===3)
+openReader(
+"The Endless Journey 3",
+endlessJourney3Story
+)
+
+}
+
+
+function saveStory(){
+
+let title=
+document.getElementById("storyTitle")
+.value.trim();
+
+let text=
+document.getElementById("storyText")
+.value.trim();
+
+let font=
+document.getElementById("storyFont")
+.value;
+
+let color=
+document.getElementById("storyColor")
+.value;
+
+if(!title||!text){
+
+alert(
+"Please enter a title and story."
+);
+
+return
+}
+
+if(coins<100){
+
+alert(
+"YOU NEED 100 COINS TO CREATE A STORY."
+);
+
+return
+}
+
+if(!confirm(
+"Creating this story will cost 100 Coins. Continue?"
+))return;
+
+stories.push({
+
+id:Date.now(),
+title,
+text,
+font,
+color
+
+});
+
+localStorage.setItem(
+"mindStories",
+JSON.stringify(stories)
+);
+
+coins-=100;
+
+updateCoins();
+
+document.getElementById("storyTitle")
+.value="";
+
+document.getElementById("storyText")
+.value="";
+
+alert(
+"Story published successfully! -100 Coins"
+);
+
+showPage("myStories");
+
+}
+
+
+function loadMyStories(){
+
+let c=
+document.getElementById("myStoriesList");
+
+c.innerHTML="";
+
+if(!stories.length){
+
+c.innerHTML=
+'<div class="card empty">You have not created any stories yet.</div>';
+
+return
+}
+
+stories.forEach(s=>{
+
+let card=
+document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=
+`<div class="story-title">${esc(s.title)}</div>
+<p class="story-description">${esc(s.text.substring(0,180))}${s.text.length>180?"...":""}</p>
+<button class="red-btn">Read Story</button>
+<button class="delete-btn">🗑️ Delete</button>`;
+
+card.querySelector(".red-btn")
+.onclick=()=>{
+openReader(
+s.title,
+s.text,
+s.font,
+s.color
+)
+};
+
+card.querySelector(".delete-btn")
+.onclick=()=>{
+deleteStory(s.id)
+};
+
+c.appendChild(card)
+
+})
+
+}
+
+
+function deleteStory(id){
+
+if(!confirm(
+"Are you sure you want to delete this story?"
+))return;
+
+stories=
+stories.filter(s=>s.id!==id);
+
+localStorage.setItem(
+"mindStories",
+JSON.stringify(stories)
+);
+
+loadMyStories()
+
+}
+
+
+function esc(t){
+
+return t
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;")
+
+}
+
+
+const gameNames=[
+
+"Math Challenge",
+"Word Scramble",
+"Memory Test",
+"Riddle Master",
+"Typing Challenge",
+"Reverse Word",
+"Number Guess",
+"Alphabet Game",
+"Quick Counting",
+"Vowel Hunter",
+"Multiplication Pro",
+"Missing Number",
+"Word Length",
+"Odd One Out",
+"Even or Odd",
+"Square Master",
+"Quick Subtraction",
+"Animal Quiz",
+"Colour Quiz",
+"Logic Master"
+
+];
+
+
+let gameProgress=
+JSON.parse(
+localStorage.getItem("mindGameProgress")
+)||{};
+
+let currentGame=0;
+
+let currentLevel=1;
+
+let currentAnswer="";
+
+
+function initializeGames(){
+
+let g=
+document.getElementById("gameGrid");
+
+g.innerHTML="";
+
+gameNames.forEach((name,i)=>{
+
+let d=
+document.createElement("div");
+
+d.className="game-card";
+
+d.innerHTML=
+`<div class="game-title">${i+1}. ${name}</div>
+<div style="color:#888">Level ${gameProgress[i]||1}/100</div>`;
+
+d.onclick=()=>{
+startGame(i)
+};
+
+g.appendChild(d)
+
+})
+
+}
+
+
+function startGame(i){
+
+if(checkGameBan())return;
+
+currentGame=i;
+
+currentLevel=
+gameProgress[i]||1;
+
+document.getElementById("gameSelection")
+.style.display="none";
+
+document.getElementById("gamePlay")
+.style.display="block";
+
+document.getElementById("currentGameName")
+.textContent=gameNames[i];
+
+generateChallenge()
+
+}
+
+
+function backToGames(){
+
+if(checkGameBan())return;
+
+document.getElementById("gameSelection")
+.style.display="block";
+
+document.getElementById("gamePlay")
+.style.display="none";
+
+initializeGames()
+
+}
+
+
+function generateChallenge(){
+
+if(checkGameBan())return;
+
+document.getElementById("gameLevel")
+.textContent=
+`Level ${currentLevel}/100 • Win = +10 Coins • Fail = -10 Coins`;
+
+let q=
+document.getElementById("gameQuestion");
+
+let o=
+document.getElementById("gameOptions");
+
+o.innerHTML="";
+
+let d=
+games[currentGame]();
+
+q.textContent=d.question;
+
+currentAnswer=
+String(d.answer);
+
+d.options.forEach(x=>{
+
+let b=
+document.createElement("button");
+
+b.className="game-option";
+
+b.textContent=x;
+
+b.onclick=()=>{
+checkAnswer(x)
+};
+
+o.appendChild(b)
+
+})
+
+}
+
+
+function checkAnswer(answer){
+
+if(String(answer)===currentAnswer){
+
+coins+=10;
+
+updateCoins();
+
+zeroCoinFailures=0;
+
+localStorage.setItem(
+"mindZeroCoinFailures",
+0
+);
+
+if(currentLevel<100){
+
+currentLevel++;
+
+gameProgress[currentGame]=
+currentLevel;
+
+localStorage.setItem(
+"mindGameProgress",
+JSON.stringify(gameProgress)
+);
+
+alert(
+"YOU WON +10 COINS!"
+);
+
+generateChallenge();
+
+}else{
+
+alert(
+"YOU COMPLETED LEVEL 100! +10 COINS"
+);
+
+gameProgress[currentGame]=100;
+
+localStorage.setItem(
+"mindGameProgress",
+JSON.stringify(gameProgress)
+);
+
+backToGames()
+
+}
+
+}else{
+
+/*
+FAILURE SYSTEM
+
+If the player has coins:
+-10 Coins.
+
+If the player has 0 Coins:
+count one zero-coin failure.
+
+At 2 zero-coin failures:
+10-minute game ban.
+*/
+
+if(coins>0){
+
+coins-=10;
+
+if(coins<0)
+coins=0;
+
+updateCoins();
+
+alert(
+"YOU FAILED -10 COINS"
+);
+
+}else{
+
+zeroCoinFailures++;
+
+localStorage.setItem(
+"mindZeroCoinFailures",
+zeroCoinFailures
+);
+
+if(zeroCoinFailures>=2){
+
+openGameBanPage();
+
+return
+}
+
+alert(
+"YOU FAILED. 1/2 FAILURES WHILE YOU HAVE 0 COINS."
+);
+
+}
+
+generateChallenge();
+
+}
+
+}
+
+
+function rnd(a,b){
+
+return Math.floor(
+Math.random()*(b-a+1)
+)+a
+
+}
+
+
+function sh(a){
+
+return a.sort(
+()=>Math.random()-.5
+)
+
+}
+
+
+function opts(a,range=1000){
+
+let s=
+new Set([String(a)]);
+
+while(s.size<4){
+
+let n=
+typeof a==="number"
+?a+rnd(-range,range)
+:String(a)+rnd(1,range);
+
+if(n<0)
+n=Math.abs(n);
+
+s.add(String(n))
+
+}
+
+return sh([...s])
+
+}
+
+
+const words=[
+
+"forest",
+"journey",
+"mystery",
+"darkness",
+"survival",
+"shadow",
+"family",
+"memory",
+"dream",
+"danger",
+"future",
+"silence",
+"broken",
+"hope",
+"secret",
+"forgotten",
+"loneliness",
+"nightmare",
+"suffering",
+"discovery",
+"destination",
+"memories",
+"abandoned",
+"whisper",
+"determination",
+"responsibility",
+"unforgettable",
+"disappointment",
+"imagination",
+"complicated",
+"extraordinary"
+
+];
+
+
+function hardMath(){
+
+let l=currentLevel;
+
+let a=
+rnd(
+50+l*10,
+200+l*30
+);
+
+let b=
+rnd(
+20+l*8,
+150+l*20
+);
+
+let c=
+rnd(
+2,
+8+Math.floor(l/10)
+);
+
+let ans;
+
+if(l<25)
+ans=a+b-c;
+
+else if(l<50)
+ans=a*b-c;
+
+else if(l<75)
+ans=a+b*c-Math.floor(a/3);
+
+else
+ans=
+a*b+
+c*(b-a%7)+
+Math.floor(a/2);
+
+return{
+
+question:
+`Solve: ${a} ${l<25?"+":"×"} ${l<25?b:b} ${l<25?"-":"+"} ${c}${l>=75?" with the final adjustment - "+Math.floor(a/3):""} = ?`,
+
+answer:ans,
+
+options:opts(
+ans,
+Math.max(
+20,
+Math.floor(Math.abs(ans)*.25)
+)
+)
+
+}
+
+}
+
+
+function wordScramble(){
+
+let w=
+words[
+rnd(0,words.length-1)
+];
+
+if(currentLevel>60)
+
+w=[
+"misunderstanding",
+"transformation",
+"responsibility",
+"determination",
+"extraordinary"
+][rnd(0,4)];
+
+let s=
+w.split("")
+.sort(()=>Math.random()-.5)
+.join("");
+
+return{
+
+question:
+"Unscramble: "+s,
+
+answer:w,
+
+options:sh([
+w,
+words[rnd(0,words.length-1)],
+words[rnd(0,words.length-1)],
+words[rnd(0,words.length-1)]
+])
+
+}
+
+}
+
+
+function memoryTest(){
+
+let n=
+Math.min(
+5+Math.floor(currentLevel/3),
+25
+);
+
+let s="";
+
+for(let i=0;i<n;i++)
+s+=rnd(0,9);
+
+return{
+
+question:
+"Memorize this sequence carefully: "+s,
+
+answer:s,
+
+options:sh([
+s,
+s.slice(0,-1)+rnd(0,9),
+s.slice(1)+rnd(0,9),
+s.split("").reverse().join("")
+])
+
+}
+
+}
+
+
+function riddle(){
+
+let r=[
+
+[
+"I speak without a mouth and hear without ears. I have no body, but I come alive with wind.",
+"echo"
+],
+
+[
+"The more you take, the more you leave behind. What am I?",
+"footsteps"
+],
+
+[
+"I have cities but no houses, forests but no trees, and water but no fish.",
+"map"
+],
+
+[
+"What disappears the moment you say its name?",
+"silence"
+],
+
+[
+"I am always in front of you but can never be seen.",
+"future"
+],
+
+[
+"What can fill a room but takes up no space?",
+"light"
+],
+
+[
+"What has many branches but no leaves, fruit, or trunk?",
+"bank"
+],
+
+[
+"What gets broken without being held?",
+"promise"
+]
+
+][rnd(0,7)];
+
+return{
+
+question:r[0],
+
+answer:r[1],
+
+options:sh([
+r[1],
+"shadow",
+"window",
+"river"
+])
+
+}
+
+}
+
+
+function typing(){
+
+let w=
+words[
+rnd(0,words.length-1)
+];
+
+return{
+
+question:
+"Select the exact word shown: "+w,
+
+answer:w,
+
+options:sh([
+w,
+w+"x",
+w.slice(0,-1),
+w.split("").reverse().join("")
+])
+
+}
+
+}
+
+
+function reverse(){
+
+let w=
+words[
+rnd(0,words.length-1)
+];
+
+let a=
+w.split("").reverse().join("");
+
+return{
+
+question:
+"Reverse this word: "+w,
+
+answer:a,
+
+options:sh([
+a,
+w,
+a+"x",
+w.split("").sort().join("")
+])
+
+}
+
+}
+
+
+function numberGuess(){
+
+let max=
+1000+currentLevel*500;
+
+let a=
+rnd(1,max);
+
+return{
+
+question:
+`Find the correct number between 1 and ${max}.`,
+
+answer:a,
+
+options:
+opts(
+a,
+Math.max(
+50,
+Math.floor(max*.08)
+)
+)
+
+}
+
+}
+
+
+function alphabet(){
+
+let letters=
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+let i=
+rnd(0,25);
+
+let a=
+letters[(i+1)%26];
+
+return{
+
+question:
+`Which letter comes immediately after ${letters[i]}?`,
+
+answer:a,
+
+options:sh([
+a,
+letters[rnd(0,25)],
+letters[rnd(0,25)],
+letters[rnd(0,25)]
+])
+
+}
+
+}
+
+
+function counting(){
+
+let a=
+100+currentLevel*17;
+
+let b=
+rnd(3,20);
+
+return{
+
+question:
+`What comes next in this sequence: ${a}, ${a+b}, ${a+b*2}, ?`,
+
+answer:a+b*3,
+
+options:
+opts(
+a+b*3,
+Math.max(10,b*4)
+)
+
+}
+
+}
+
+
+function vowels(){
+
+let w=
+words[
+rnd(0,words.length-1)
+];
+
+let a=
+(w.match(/[aeiou]/gi)||[]).length;
+
+return{
+
+question:
+`Count the vowels in "${w}".`,
+
+answer:a,
+
+options:
+opts(a,5)
+
+}
+
+}
+
+
+function multiplication(){
+
+let a=
+rnd(
+10+currentLevel,
+30+currentLevel*3
+);
+
+let b=
+rnd(
+8+Math.floor(currentLevel/2),
+25+currentLevel*2
+);
+
+let a1=a*b;
+
+return{
+
+question:
+`${a} × ${b} = ?`,
+
+answer:a1,
+
+options:
+opts(
+a1,
+Math.max(
+30,
+Math.floor(a1*.15)
+)
+)
+
+}
+
+}
+
+
+function missing(){
+
+let start=
+rnd(
+10,
+100+currentLevel*10
+);
+
+let step=
+rnd(
+3,
+5+Math.floor(currentLevel/5)
+);
+
+let pattern=
+currentLevel>50
+?step*step
+:step;
+
+let a=
+start+pattern;
+
+let b=
+a+pattern;
+
+let c=
+b+pattern;
+
+return{
+
+question:
+`Find ?: ${start}, ${a}, ${b}, ?, ${c+pattern}`,
+
+answer:c,
+
+options:
+opts(
+c,
+Math.max(
+10,
+pattern*4
+)
+)
+
+}
+
+}
+
+
+function wordLength(){
+
+let w=
+words[
+rnd(0,words.length-1)
+];
+
+return{
+
+question:
+`How many letters are in "${w}"?`,
+
+answer:w.length,
+
+options:
+opts(
+w.length,
+4
+)
+
+}
+
+}
+
+
+function odd(){
+
+let good=
+rnd(1,500)*2+1;
+
+return{
+
+question:
+"Which number is odd?",
+
+answer:String(good),
+
+options:sh([
+String(good),
+String(rnd(1,500)*2),
+String(rnd(1,500)*2),
+String(rnd(1,500)*2)
+])
+
+}
+
+}
+
+
+function evenOdd(){
+
+let n=
+rnd(
+1,
+5000+currentLevel*1000
+);
+
+let a=
+n%2?"Odd":"Even";
+
+return{
+
+question:
+`Is ${n} Even or Odd?`,
+
+answer:a,
+
+options:[
+"Even",
+"Odd"
+]
+
+}
+
+}
+
+
+function square(){
+
+let n=
+rnd(
+10+Math.floor(currentLevel/2),
+30+currentLevel
+);
+
+let a=n*n;
+
+return{
+
+question:
+`What is ${n}²?`,
+
+answer:a,
+
+options:
+opts(
+a,
+Math.max(
+50,
+Math.floor(a*.12)
+)
+)
+
+}
+
+}
+
+
+function subtraction(){
+
+let a=
+rnd(
+500+currentLevel*10,
+2000+currentLevel*40
+);
+
+let b=
+rnd(
+100,
+a-1
+);
+
+let ans=
+a-b;
+
+return{
+
+question:
+`${a} - ${b} = ?`,
+
+answer:ans,
+
+options:
+opts(
+ans,
+Math.max(
+30,
+Math.floor(ans*.2)
+)
+)
+
+}
+
+}
+
+
+function animal(){
+
+let x=[
+
+[
+"Which mammal has the longest gestation period?",
+"Elephant"
+],
+
+[
+"Which animal has three hearts?",
+"Octopus"
+],
+
+[
+"Which bird cannot fly but is the largest living bird?",
+"Ostrich"
+],
+
+[
+"Which animal can regenerate lost limbs?",
+"Axolotl"
+]
+
+][rnd(0,3)];
+
+return{
+
+question:x[0],
+
+answer:x[1],
+
+options:sh([
+x[1],
+"Tiger",
+"Eagle",
+"Dolphin"
+])
+
+}
+
+}
+
+
+function colour(){
+
+let c=[
+
+"Red",
+"Blue",
+"Green",
+"Yellow",
+"Purple",
+"Orange"
+
+];
+
+let a=
+c[rnd(0,c.length-1)];
+
+return{
+
+question:
+"Which of these is a colour?",
+
+answer:a,
+
+options:sh([
+a,
+"Stone",
+"Cloud",
+"River"
+])
+
+}
+
+}
+
+
+function logic(){
+
+let n=
+rnd(
+10+currentLevel,
+30+currentLevel*2
+);
+
+let m=
+rnd(2,6);
+
+let a=
+(n+2)*m;
+
+return{
+
+question:
+`If ${n} → ${n*m}, and ${n+1} → ${(n+1)*m}, what does ${n+2} → ?`,
+
+answer:a,
+
+options:
+opts(
+a,
+Math.max(
+10,
+Math.floor(a*.1)
+)
+)
+
+}
+
+}
+
+
+const games=[
+
+hardMath,
+wordScramble,
+memoryTest,
+riddle,
+typing,
+reverse,
+numberGuess,
+alphabet,
+counting,
+vowels,
+multiplication,
+missing,
+wordLength,
+odd,
+evenOdd,
+square,
+subtraction,
+animal,
+colour,
+logic
+
+];
+
+
+/* BAN SYSTEM */
+
+function openGameBanPage(){
+
+if(gameBanUntil<=Date.now()){
+
+gameBanUntil=
+Date.now()+10*60*1000;
+
+localStorage.setItem(
+"mindGameBanUntil",
+gameBanUntil
+)
+
+}
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+
+document.getElementById("gameBan")
+.classList.add("active");
+
+updateBanDisplay()
+
+}
+
+
+function updateBanDisplay(){
+
+if(banTimer)
+clearInterval(banTimer);
+
+let c=
+document.getElementById("banCountdown");
+
+function update(){
+
+let r=
+gameBanUntil-Date.now();
+
+if(r<=0){
+
+clearInterval(banTimer);
+
+localStorage.removeItem(
+"mindGameBanUntil"
+);
+
+gameBanUntil=0;
+
+zeroCoinFailures=0;
+
+localStorage.setItem(
+"mindZeroCoinFailures",
+0
+);
+
+showPage("game");
+
+return
+}
+
+let sec=
+Math.ceil(r/1000);
+
+let min=
+Math.floor(sec/60);
+
+let s=
+sec%60;
+
+c.textContent=
+String(min).padStart(2,"0")
++":"
++String(s).padStart(2,"0");
+
+}
+
+update();
+
+banTimer=
+setInterval(
+update,
+1000
+)
+
+}
+
+
+function checkGameBan(){
+
+if(gameBanUntil>Date.now()){
+
+openGameBanPage();
+
+return true
+
+}
+
+if(gameBanUntil!==0){
+
+localStorage.removeItem(
+"mindGameBanUntil"
+);
+
+gameBanUntil=0;
+
+zeroCoinFailures=0;
+
+localStorage.setItem(
+"mindZeroCoinFailures",
+0
+)
+
+}
+
+return false
+
+}
+
+
+updateCoins();
+
+initializeGames();
+
+
+if(gameBanUntil>Date.now()){
+
+openGameBanPage();
+
+}else if(gameBanUntil!==0){
+
+localStorage.removeItem(
+"mindGameBanUntil"
+);
+
+gameBanUntil=0;
+
+zeroCoinFailures=0;
+
+localStorage.setItem(
+"mindZeroCoinFailures",
+0
+)
+
+}
+
+</script>
+
+</body>
+</html>
